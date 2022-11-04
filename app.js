@@ -6,6 +6,8 @@ app.set('view engine', 'ejs')
 let items = [];
 
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static('public'));
+
 let today = new Date();
 
 let options = {
