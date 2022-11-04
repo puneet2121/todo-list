@@ -5,20 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <ul>
-      <li>Buy food</li>
-      <li>cook food</li>
-      <% for(tan of tango) { %>
-      <li><%= tan %></li>
-      <%}%>
-    </ul>
-    <form action="/" method="POST">
-      <label>Please write the task name</label>
-      <input type="text" name="t" />
-      <button type="submit">submit</button>
-    </form>
+    <div class="box" id="heading">
+      <h1><%= theDay %></h1>
+    </div>
+    <div class="box">
+      <% for(let i= 0; i < tango.length; i++) { %>
+      <div class="item">
+        
+        <input type="checkbox" />
+        <p><%= tango[i] %></p><br>
+      </div>
+      <% } %>
+    
+      <form class="item" action="/" method="POST">
+        <input type="text" name="t" placeholder="New Item" />
+        <button type="submit">submit</button>
+      </form>
+    </div>
   </body>
 </html>
