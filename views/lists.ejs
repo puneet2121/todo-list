@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="box" id="heading">
-      <h1><%= theDay %></h1>
+      <h1><%= title %></h1>
     </div>
     <div class="box">
       <% for(let i= 0; i < tango.length; i++) { %>
@@ -22,7 +22,7 @@
     
       <form class="item" action="/" method="POST">
         <input type="text" name="t" placeholder="New Item" />
-        <button type="submit">submit</button>
+        <button type="submit" name="btn" value=<%= title %>>submit</button>
       </form>
     </div>
   </body>
