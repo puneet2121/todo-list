@@ -1,6 +1,6 @@
 # Todo-List
 
-Todo-List is a simple web application where user can manage there daily tasks. 
+Todo-List is a simple web application where users can manage their daily tasks.
 
 ## Getting Started
 
