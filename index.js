@@ -3,9 +3,10 @@ const bodyParser = require("body-parser");
 
 
 const mongoose = require('mongoose');
+
 const dotenv = require('dotenv');
 dotenv.config();
-mongoose.connect(process.env.URL,{useNewUrlParser: true});
+mongoose.connect(process.env.URL,{useNewUrlParser: true, useUnifiedTopology: true});
 
 const app = express();
 app.set("view engine", "ejs");
@@ -33,13 +34,6 @@ const item3 = new Item({
 });
 const defaultItems = [item1, item2, item3];
 
-const listSchema = {
-  name: String,
-  items: [itemsSchema]
-
-}
-
-const List = mongoose.model('List',listSchema);
 
 app.get("/", (req, res) => {
   Item.find({}, function (err, foundItems) {
@@ -59,25 +53,7 @@ app.get("/", (req, res) => {
 });
 
 
-app.get('/:customName', function(req,res) {
-  const customName = req.params.customName;
-  List.findOne({name: customName}, function(err, foundList){
-    if(!err) {
-      if (!foundList) {
-        const list = new List({
-          name: customName,
-          items: defaultItems
-        });
-        list.save();
-        res.redirect('/' + customName);
-      } else {
-        res.render('lists',{title: foundList.name, tango: foundList.items})
-      }
-    }
-  })
-  
-  
-}); 
+ 
 
 app.post("/", (req, res) => {
   let itemName = req.body.t;
