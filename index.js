@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const dotenv = require('dotenv');
 dotenv.config();
-mongoose.connect(process.env.URL,{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser: true, useUnifiedTopology: true});
 
 const app = express();
 app.set("view engine", "ejs");
@@ -76,6 +76,6 @@ app.post('/delete',(req,res) => {
 
 
 
-app.listen(3000, () => {
-  console.log("server listening on 3000");
+app.listen(process.env.PORT, () => {
+  console.log("server listening");
 });
