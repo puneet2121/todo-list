@@ -12,16 +12,16 @@
       <h1><%= title %></h1>
     </div>
     <div class="box">
-      <% for(let i= 0; i < tango.length; i++) { %>
+      <% tango.forEach(function(item) { %>
       <div class="item">
         
         <input type="checkbox" />
-        <p><%= tango[i] %></p><br>
+        <p><%= item.name %></p><br>
       </div>
-      <% } %>
+      <% }) %>
     
       <form class="item" action="/" method="POST">
-        <input type="text" name="t" placeholder="New Item" />
+        <input type="text" name="t" placeholder="New Item" autocomplete="off"/>
         <button type="submit" name="btn" value=<%= title %>>submit</button>
       </form>
     </div>

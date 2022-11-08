@@ -1,24 +1,43 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const Item = require("./database/database");
 
 const app = express();
 app.set("view engine", "ejs");
-let items = [];
-let workList = [];
 
+// middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let today = new Date();
+const item1 = new Item({
+  name: "Welcome to your todolist",
+});
 
-let options = {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-};
-let date = today.toLocaleDateString("en-us", options);
+const itme2 = new Item({
+  name: "Hit the submit button to add an item",
+});
+
+const item3 = new Item({
+  name: "Hit the checkbox when the task is complete",
+});
+
+const defaultItems = [item1, itme2, item3];
+
 app.get("/", (req, res) => {
-  res.render("lists", { title: date, tango: items });
+  Item.find({}, function (err, foundItems) {
+    if (foundItems.length === 0) {
+      Item.insertMany(defaultItems, function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("DB saved");
+        }
+      });
+      res.redirect('/');
+    } else {
+      res.render("lists", { title: "Today", tango: foundItems });
+    }
+  });
 });
 
 app.get("/work", (req, res) => {
@@ -26,14 +45,12 @@ app.get("/work", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  let item = req.body.t;
-  if ((req.body.btn = "work")) {
-    workList.push(item);
-    res.redirect("/work");
-  } else {
-    items.push(item);
-    res.redirect("/");
-  }
+  let itemName = req.body.t;
+  const item = new Item({
+    name: itemName
+  });
+  item.save();
+  res.redirect('/')
 });
 app.post("/work", (req, res) => {
   let item = req.body.t;
