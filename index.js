@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const dotenv = require('dotenv');
 dotenv.config();
-mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DATABASE_URL ,{useNewUrlParser: true, useUnifiedTopology: true});
 
 const app = express();
 app.set("view engine", "ejs");
