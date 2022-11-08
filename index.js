@@ -11,7 +11,7 @@ mongoose.connect(process.env.DATABASE_URL ,{useNewUrlParser: true, useUnifiedTop
 const app = express();
 app.set("view engine", "ejs");
 
-// middleware
+// middlewar
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
