@@ -52,6 +52,16 @@ app.post("/", (req, res) => {
   item.save();
   res.redirect('/')
 });
+
+app.post('/delete',(req,res) => {
+  const checkedItemId = req.body.checkbox;
+  Item.findByIdAndRemove(checkedItemId,function(err) {
+    if(!err) {
+      console.log('item deleted successfully');
+      res.redirect('/')
+    } 
+  });
+});
 app.post("/work", (req, res) => {
   let item = req.body.t;
   workList.push(item);
