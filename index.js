@@ -6,8 +6,7 @@ const mongoose = require('mongoose');
 
 const dotenv = require('dotenv');
 dotenv.config();
-
-mongoose.connect( `mongodb+srv://admin-puneet:%40${process.env.PASSWORD}@cluster0.yyi9mqw.mongodb.net/todolistDB`,{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MONGO_URI ,{useNewUrlParser: true, useUnifiedTopology: true});
 const app = express();
 app.set("view engine", "ejs");
 
