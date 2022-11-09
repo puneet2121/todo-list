@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/puneet2121/todo-list#readme",
   "dependencies": {
+    "@railway/cli": "^2.0.13",
     "body-parser": "^1.20.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
