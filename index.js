@@ -7,22 +7,9 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 const URL = process.env.MONGO_URI.toString()
-const connectDB =  async ()=>{
 
-  try{
-      const conn = await mongoose.connect(process.env.MONGO_URI,{
-          //must add in order to not get any error masseges:
-          useUnifiedTopology:true,
-          useNewUrlParser: true,
-      })
-      console.log(`mongo database is connected!!! ${conn.connection.host} `)
-  }catch(error){
-      console.error(`Error: ${error} `)
-      process.exit(1) //passing 1 - will exit the proccess with error
-  }
-
-}
-connectDB()
+const port = process.env.PORT;
+mongoose.connect(URL ,{useNewUrlParser: true, useUnifiedTopology: true});
 const app = express();
 app.set("view engine", "ejs");
 
@@ -91,6 +78,6 @@ app.post('/delete',(req,res) => {
 
 
 
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
   console.log("server listening");
 });
