@@ -1,10 +1,10 @@
-const express = require("express");
-const bodyParser = require("body-parser");
 
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import Item from './models/todo.js'
+import dotenv from 'dotenv'
 
-const mongoose = require('mongoose');
-
-const dotenv = require('dotenv');
 dotenv.config();
 
 const URL = process.env.MONGO_URI
@@ -18,11 +18,6 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-
-const itemsSchema  = new mongoose.Schema({
-  name: String,
-});
-const Item = mongoose.model('item',itemsSchema);
 
 const item1 = new Item({
   name: "Welcome to your todolist",
