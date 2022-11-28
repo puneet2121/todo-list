@@ -13,7 +13,9 @@ Todo-List is a simple web application where users can manage their daily tasks.
 - Express
 - Node.js
 - body-parser
-- nodemon
+- Nodemon
+- MongoDB
+- Mongoose
 
 ## Screenshots
 
