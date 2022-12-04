@@ -3,15 +3,18 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import Item from '../models/todo.js'
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
 const URL = process.env.MONGO_URI
 
+
 const port = process.env.PORT;
 mongoose.connect(URL ,{useNewUrlParser: true, useUnifiedTopology: true});
 const app = express();
+app.use(cors());
 app.set("view engine", "ejs");
 
 // middlewar
