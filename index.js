@@ -1,31 +1,23 @@
+
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-import Item from "./models/todo.js";
-import dotenv from "dotenv";
+import Item from './models/todo.js'
+import dotenv from 'dotenv'
 
 dotenv.config();
 
-const URL = process.env.MONGO_URI;
+const URL = process.env.MONGO_URI
 
 const port = process.env.PORT;
-mongoose
-  .connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((conn) => {
-    console.log("connected to DB");
-  })
-  .catch((err) => {
-    console.log("error while conneting");
-    process.exit(1);
-  });
-
+mongoose.connect(URL ,{useNewUrlParser: true, useUnifiedTopology: true});
 const app = express();
-app.use(express.json);
 app.set("view engine", "ejs");
 
 // middlewar
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
 
 const item1 = new Item({
   name: "Welcome to your todolist",
@@ -40,6 +32,7 @@ const item3 = new Item({
 });
 const defaultItems = [item1, item2, item3];
 
+
 app.get("/", (req, res) => {
   Item.find({}, function (err, foundItems) {
     if (foundItems.length === 0) {
@@ -50,31 +43,36 @@ app.get("/", (req, res) => {
           console.log("DB saved");
         }
       });
-      res.redirect("/");
+      res.redirect('/');
     } else {
       res.render("lists", { title: "Today", tango: foundItems });
     }
   });
 });
 
+
+ 
+
 app.post("/", (req, res) => {
   let itemName = req.body.t;
   const item = new Item({
-    name: itemName,
+    name: itemName
   });
   item.save();
-  res.redirect("/");
+  res.redirect('/')
 });
 
-app.post("/delete", (req, res) => {
+app.post('/delete',(req,res) => {
   const checkedItemId = req.body.checkbox;
-  Item.findByIdAndRemove(checkedItemId, function (err) {
-    if (!err) {
-      console.log("item deleted successfully");
-      res.redirect("/");
-    }
+  Item.findByIdAndRemove(checkedItemId,function(err) {
+    if(!err) {
+      console.log('item deleted successfully');
+      res.redirect('/')
+    } 
   });
 });
+
+
 
 app.listen(port, () => {
   console.log("server listening");
