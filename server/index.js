@@ -2,7 +2,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-import Item from './models/todo.js'
+import Item from '../models/todo.js'
 import dotenv from 'dotenv'
 
 dotenv.config();
